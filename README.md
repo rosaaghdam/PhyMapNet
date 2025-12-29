@@ -1,4 +1,4 @@
-## CMiNet: Consensus Microbiome Network Algorithm
+## PhyMapNet: A Phylogeny-Guided Bayesian Framework for Reliable Microbiome Network Inference
 <img src="logo/logo.pdf" style="width:13%;" align=right>
 
 [![GitHub license](https://img.shields.io/github/license/solislemuslab/CMiNet?color=yellow)](https://github.com/solislemuslab/CMiNet/blob/main/LICENSE)
