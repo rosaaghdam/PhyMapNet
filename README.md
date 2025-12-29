@@ -1,5 +1,5 @@
 ## CMiNet: Consensus Microbiome Network Algorithm
-<img src="image/logo.png" style="width:13%;" align=right>
+<img src="logo/logo.png" style="width:13%;" align=right>
 
 [![GitHub license](https://img.shields.io/github/license/solislemuslab/CMiNet?color=yellow)](https://github.com/solislemuslab/CMiNet/blob/main/LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/solislemuslab/CMiNet)](https://github.com/solislemuslab/CMiNet/issues)
