@@ -9,9 +9,7 @@
 
 ## Description
 <div align="justify">
-CMiNet is an R package designed to generate consensus microbiome networks by integrating results from multiple network construction algorithms. This tool is specifically tailored for microbiome data, where capturing the intricate relationships between microbial taxa is essential to understanding complex biological systems and their impacts on health and disease.
-
-The package employs a range of established algorithms, including Pearson and Spearman correlation, Biweight midcorrelation, Sparse Correlations for Compositional data (SparCC), Sparse InversE Covariance estimation for Ecological Association and Statistical Inference (SpiecEasi), Semi-Parametric Rank-based Correlation and Partial Correlation Estimation (SPRING), Generalized Co-Occurrence Differential Abundance analysis (gCoda), Correlation Inference for Compositional Data through Lasso (CCLasso), and a novel algorithm based on conditional mutual information (c_MI). These algorithms construct individual microbial association networks, which CMiNet then combines into a single, weighted consensus network. By leveraging the strengths of each method, CMiNet provides a comprehensive and reliable representation of microbial interactions.
+PhyMapNet is a Bayesian Gaussian Graphical Model framework for inferring microbiome interaction networks that explicitly integrates phylogenetic information. By incorporating evolutionary distances through kernel-based priors, PhyMapNet embeds biological structure directly into precision matrix estimation, enabling robust inference of conditional dependencies among microbial taxa. To reduce sensitivity to hyperparameter choices, PhyMapNet constructs reliability-driven consensus networks by aggregating results across a large hyperparameter ensemble, yielding stable and interpretable microbiome networks with controllable sparsity. The method is computationally efficient and supports multiple normalization strategies, making it suitable for real-world, high-dimensional microbiome datasets.
 </div>
 <img src="image/CMiNet-Page-2.jpg" style="width:45%;" align=right>
 
