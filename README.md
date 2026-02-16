@@ -28,8 +28,6 @@ If required packages are missing, install them manually:
 # Dependencies
 install.packages(c("ape", "GMPR", "compositions"))
 ```
-
-
 ## Running PhyMapNet Package
 <div align="justify">
 The package provides two main analysis functions:
@@ -40,7 +38,7 @@ The package provides two main analysis functions:
 
 </div>
 
-1. **phymapnet_fit()**: single-model inference
+### 1. **phymapnet_fit()**: single-model inference
 - Inputs
 otu: samples × taxa abundance matrix (rownames = samples, colnames = taxa)
 tree: phylogenetic tree (ape::phylo) with tip.label matching taxa names
