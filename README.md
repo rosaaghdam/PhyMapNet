@@ -39,58 +39,37 @@ Algorithms Applied in CMiNet:
 
 ## Installation
 ```bash
+# install devtools if needed
 install.packages("devtools")
-devtools::install_github("solislemuslab/CMiNet")
-```
-If there are any errors during installation, please install the missing dependencies manually.
-In particular the automatic installation of SPRING and SpiecEasi (only available on GitHub) does sometimes not work. These packages can be installed as follows (the order is important because SPRING depends on SpiecEasi):
-```bash
-devtools::install_github("zdk123/SpiecEasi@v1.1.1")
-devtools::install_github("GraceYoon/SPRING")
-if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
-BiocManager::install(c("AnnotationDbi", "GO.db", "preprocessCore", "impute","WGCNA"))
-library(AnnotationDbi)
-library(GO.db)
-library(preprocessCore)
-library(impute)
-library(WGCNA)
-library(SpiecEasi)
-library(SPRING)
-```
-## Important Setup Information
 
-To ensure all output files and figures are saved automatically and organized properly, we recommend opening a new R project. This setup will help organize the generated files, as CMiNet will automatically save figures and outputs in the current working directory. If you prefer to specify a different path for saving the output (e.g., the Binary_network files), you can manually set the path in your code.
+# install phymapnet from GitHub
+devtools::install_github("rosaaghdam/PhyMapNet")
+```
+# Dependencies
+If required packages are missing, install them manually:
+```bash
+install.packages(c("ape", "GMPR", "compositions"))
+```
 
 
 ## Running CMiNet Package
 <div align="justify">
-The CMiNet Package contains four main functions:
+The package provides two main analysis functions:
 
-1. **CMiNet**: This function constructs a consensus network from microbiome data using multiple methods.
+1. **phymapnet_fit()**:  Fit a single PhyMapNet model and return a sparse network.
 
-2. **process_and_visualize_network**: This function processes a weighted microbiome network and visualizes it across different thresholds. Each threshold represents a minimum edge weight required for inclusion in the network plot.
+2. **phymapnet_reliability()**: Run an ensemble across hyperparameters and compute edge reliability and a consensus network.
 
-3. **plot_hamming_distances**: Calculates the Hamming distance, common edges, and the number of edges for each pair of resulting network matrices.
-
-4. **plot_network**: This function generates a network plot from a final network produced by CMiNet.
 </div>
 
-## CMiNet Function
-### loading the Data
-We use the American Gut data from [SpiecEasi package](https://github.com/zdk123/SpiecEasi) to run CMiNet algorithm to construct consensus microbiome network. 
-First, load CMiNet and the American Gut Project data (included with the [SpiecEasi package](https://github.com/zdk123/SpiecEasi)), which is automatically loaded alongside CMiNet).
-
-```bash
-library(SpiecEasi)
-library(SPRING)
-library(CMiNet)
-data("amgut1.filt")
-data = amgut1.filt
-taxa_name <- matrix(0, nrow = dim(data)[2], ncol = 2)
-taxa_name[, 1] <- colnames(data)        
-taxa_name[, 2] <- 1:dim(data)[2]       
-colnames(taxa_name) <- c("original", "figures_name")
+### phymapnet_fit(): single-model inference
+### Inputs
+otu: samples × taxa abundance matrix (rownames = samples, colnames = taxa)
+tree: phylogenetic tree (ape::phylo) with tip.label matching taxa names
+### Output
+precision_map: estimated precision matrix
+adjacency: binary network (0/1)
+threshold: sparsification threshold used
 ```
 ### Define the parameter on all Algorithms
 We designed the package to allow users to adjust the default parameters of each algorithm according to their preferences and specific research needs.
