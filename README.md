@@ -173,7 +173,7 @@ head(res$edge_list, 10)
 
 ## Reporting Issues and Asking Questions
 
-If you encounter a bug, experience a failed function, or have a feature request, please open an issue in the GitHub [issue tracker](https://github.com/solislemuslab/CMiNet/issues). 
+If you encounter a bug, experience a failed function, or have a feature request, please open an issue in the GitHub [issue tracker](https://github.com/rosaaghdam/PhyMapNet/issues). 
 
 ## License
 
