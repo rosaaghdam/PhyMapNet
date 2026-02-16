@@ -38,15 +38,15 @@ The package provides two main analysis functions:
 
 </div>
 
-### 1. **phymapnet_fit()**: single-model inference
+### **phymapnet_fit()**: single-model inference
 - Inputs:
   - otu: samples × taxa abundance matrix (rownames = samples, colnames = taxa)
-  tree: phylogenetic tree (ape::phylo) with tip.label matching taxa names
-- Output
-precision_map: estimated precision matrix
-adjacency: binary network (0/1)
-threshold: sparsification threshold used
-```
+  - tree: phylogenetic tree (ape::phylo) with tip.label matching taxa names
+- Output:
+  precision_map: estimated precision matrix
+  adjacency: binary network (0/1)
+  threshold: sparsification threshold used
+
 
 ### Define the parameter on all Algorithms
 We designed the package to allow users to adjust the default parameters of each algorithm according to their preferences and specific research needs.
