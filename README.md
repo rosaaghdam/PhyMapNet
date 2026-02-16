@@ -39,9 +39,9 @@ The package provides two main analysis functions:
 </div>
 
 ### 1. **phymapnet_fit()**: single-model inference
-- Inputs
-otu: samples × taxa abundance matrix (rownames = samples, colnames = taxa)
-tree: phylogenetic tree (ape::phylo) with tip.label matching taxa names
+- Inputs:
+  otu: samples × taxa abundance matrix (rownames = samples, colnames = taxa)
+  tree: phylogenetic tree (ape::phylo) with tip.label matching taxa names
 - Output
 precision_map: estimated precision matrix
 adjacency: binary network (0/1)
