@@ -38,6 +38,67 @@ The package provides two main analysis functions:
 
 </div>
 
+## Running `phymapnet`
+
+The package provides two main analysis functions for phylogeny-aware microbial network inference.
+
+---
+
+### 1. `phymapnet_fit()` — Single-Model Inference
+
+Fits a single PhyMapNet model using specified hyperparameters to estimate a sparse microbial association network.
+
+#### Inputs
+
+- `otu`: Samples × taxa abundance matrix  
+  (rows = samples, columns = taxa)
+- `tree`: Phylogenetic tree (`ape::phylo`)  
+  with `tip.label` matching OTU column names
+
+#### Outputs
+
+- `precision_map`: Estimated precision matrix  
+- `adjacency`: Binary network (0/1)  
+- `threshold`: Sparsification threshold used  
+
+---
+
+### 2. `phymapnet_reliability()` — Ensemble Reliability Inference
+
+Performs hyperparameter-ensemble inference to assess edge stability across multiple model configurations.
+
+#### Inputs
+
+- `otu`: Samples × taxa abundance matrix  
+  (rows = samples, columns = taxa)
+- `tree`: Phylogenetic tree (`ape::phylo`)  
+  with `tip.label` matching OTU column names
+
+#### Outputs
+
+- `rel_mat`: Weighted reliability network (values in [0, 1])  
+- `consensus_mat`: Binary consensus network based on `consensus_cut`  
+- `edge_list`: Edges ranked by reliability  
+
+---
+
+### Model Parameters
+
+Both functions allow customization of the following parameters:
+
+- `alpha`: Bandwidth parameter controlling the decay of the phylogenetic kernel  
+- `k`: Neighborhood scaling factor defining the effective prior sample size (`k × p`)  
+- `epsilon1`: Diagonal regularization parameter added to the prior covariance matrix  
+- `epsilon2`: Regularization parameter added during precision matrix inversion  
+- `kernel`: Kernel type (`"gaussian"` or `"laplacian"`) defining how phylogenetic distances are transformed into similarity weights  
+- `normalization`: Data transformation method (`"log"`, `"gmpr"`, `"clr"`, `"tss"`) applied before network inference  
+
+---
+
+### Conceptual Difference
+
+- `phymapnet_fit()` constructs a network under a fixed set of hyperparameters.  
+- `phymapnet_reliability()` evaluates network stability across multiple parameter configurations and identifies robust edges through ensemble consensus.
 
 
 - 
