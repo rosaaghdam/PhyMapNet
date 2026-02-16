@@ -122,15 +122,11 @@ tree <- read.tree(text =
      ):0.1
    );"
 )
-
+plot(tree, main = "Toy Phylogenetic Tree")
 ```
 
 ## Single-Model Inference
-# Visualize the toy tree
 ```bash
-plot(tree, main = "Toy Phylogenetic Tree")
-
-
 fit <- phymapnet_fit(
   otu,
   tree,
@@ -148,8 +144,7 @@ fit$adjacency
 ```
 
 ## Ensemble Reliability Inference
-
-
+```bash
 res <- phymapnet_reliability(
   otu,
   tree,
@@ -173,7 +168,7 @@ res$consensus_mat
 # Top edges ranked by reliability
 head(res$edge_list, 10)
 
-
+```
 
 
 ## Reporting Issues and Asking Questions
