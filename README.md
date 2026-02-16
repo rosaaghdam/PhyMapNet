@@ -28,15 +28,6 @@ If required packages are missing, install them manually:
 # Dependencies
 install.packages(c("ape", "GMPR", "compositions"))
 ```
-## Running PhyMapNet Package
-<div align="justify">
-The package provides two main analysis functions:
-
-1. **phymapnet_fit()**:  Fit a single PhyMapNet model and return a sparse network.
-
-2. **phymapnet_reliability()**: Run an ensemble across hyperparameters and compute edge reliability and a consensus network.
-
-</div>
 
 ## Running `phymapnet`
 
@@ -92,7 +83,6 @@ Both functions allow customization of the following parameters:
 - `epsilon2`: Regularization parameter added during precision matrix inversion  
 - `kernel`: Kernel type (`"gaussian"` or `"laplacian"`) defining how phylogenetic distances are transformed into similarity weights  
 - `normalization`: Data transformation method (`"log"`, `"gmpr"`, `"clr"`, `"tss"`) applied before network inference  
-
 ---
 
 ### Conceptual Difference
@@ -100,8 +90,6 @@ Both functions allow customization of the following parameters:
 - `phymapnet_fit()` constructs a network under a fixed set of hyperparameters.  
 - `phymapnet_reliability()` evaluates network stability across multiple parameter configurations and identifies robust edges through ensemble consensus.
 
-
-- 
 ## Toy example (fully reproducible)
 This example generates a small OTU table and a matching tree, then runs both functions.
 
