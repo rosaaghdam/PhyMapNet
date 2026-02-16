@@ -1,22 +1,22 @@
 ## PhyMapNet: A Phylogeny-Guided Bayesian Framework for Reliable Microbiome Network Inference
 <img src="logo/logo.png" style="width:50%;" align=right>
 
-[![GitHub license](https://img.shields.io/github/license/solislemuslab/CMiNet?color=yellow)](https://github.com/solislemuslab/CMiNet/blob/main/LICENSE)
-[![GitHub Issues](https://img.shields.io/github/issues/solislemuslab/CMiNet)](https://github.com/solislemuslab/CMiNet/issues)
-![Code Size](https://img.shields.io/github/languages/code-size/solislemuslab/CMiNet?color=white)
-[![GitHub Releases](https://img.shields.io/github/v/release/solislemuslab/CMiNet?display_name=tag)](https://github.com/solislemuslab/CMiNet/releases)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.17459775.svg)](https://doi.org/10.5281/zenodo.17459775)
+[![GitHub license](https://img.shields.io/github/license/rosaaghdam/PhyMapNet?color=yellow)](https://github.com/rosaaghdam/PhyMapNet/blob/main/LICENSE)
+[![GitHub Issues](https://img.shields.io/github/issues/rosaaghdam/PhyMapNet)](https://github.com/rosaaghdam/PhyMapNet/issues)
+![Code Size](https://img.shields.io/github/languages/code-size/rosaaghdam/PhyMapNet?color=white)
+[![GitHub Releases](https://img.shields.io/github/v/release/rosaaghdam/PhyMapNet?display_name=tag)](https://github.com/rosaaghdam/PhyMapNet/releases)
+
 
 ## Description
 <div align="justify">
   
-**PhyMapNet** is a Bayesian Gaussian Graphical Model framework for inferring microbiome interaction networks that explicitly integrates phylogenetic information. By incorporating evolutionary distances through kernel-based priors, PhyMapNet embeds biological structure directly into precision matrix estimation, enabling robust inference of conditional dependencies among microbial taxa. To reduce sensitivity to hyperparameter choices, PhyMapNet constructs reliability-driven consensus networks by aggregating results across a large hyperparameter ensemble, yielding stable and interpretable microbiome networks with controllable sparsity. The method is computationally efficient and supports multiple normalization strategies, making it suitable for real-world, high-dimensional microbiome datasets.
+**PhyMapNet** is a Bayesian Gaussian Graphical Model framework for inferring microbiome interaction networks that explicitly integrates phylogenetic information. By incorporating evolutionary distances through kernel-based priors, PhyMapNet embeds biological structure directly into precision matrix estimation, enabling robust inference of conditional dependencies among microbial taxa. To reduce sensitivity to hyperparameter choices, PhyMapNet constructs reliability-based consensus networks by aggregating results across a large hyperparameter ensemble, yielding stable and interpretable microbiome networks with controllable sparsity. The method is computationally efficient and supports multiple normalization strategies, making it suitable for real-world, high-dimensional microbiome datasets.
 </div>
 
 **Figure overview**. PhyMapNet takes normalized microbiome count data and phylogenetic relationships as input, embeds evolutionary structure into a Bayesian graphical model, and infers sparse microbial interaction networks. To ensure robustness, the procedure is repeated across multiple hyperparameter settings, and a stable consensus network is selected based on predefined criteria.
 
 ## Installation
-```bash
+```r
 # install devtools if needed
 install.packages("devtools")
 
@@ -24,7 +24,7 @@ install.packages("devtools")
 devtools::install_github("rosaaghdam/PhyMapNet")
 ```
 If required packages are missing, install them manually:
-```bash
+```r
 # Dependencies
 install.packages(c("ape", "GMPR", "compositions"))
 ```
@@ -95,11 +95,11 @@ Both functions allow customization of the following parameters:
 
 This example generates a small synthetic OTU table and a matching phylogenetic tree, then runs both `phymapnet_fit()` and `phymapnet_reliability()`.
 
-```{r, message=FALSE, warning=FALSE}
+```r
 library(phymapnet)
 library(ape)
 
-set.seed(1)
+set.seed(123)
 
 # -------------------------------------------------
 # 1. Generate a toy OTU table (10 samples × 6 taxa)
@@ -126,7 +126,7 @@ plot(tree, main = "Toy Phylogenetic Tree")
 ```
 
 ## Single-Model Inference
-```bash
+```r
 fit <- phymapnet_fit(
   otu,
   tree,
@@ -144,7 +144,7 @@ fit$adjacency
 ```
 
 ## Ensemble Reliability Inference
-```bash
+```r
 res <- phymapnet_reliability(
   otu,
   tree,
@@ -167,24 +167,31 @@ res$consensus_mat
 
 # Top edges ranked by reliability
 head(res$edge_list, 10)
-
 ```
 
 
 ## Reporting Issues and Asking Questions
 
-If you encounter a bug, experience a failed function, or have a feature request, please open an issue in the GitHub [issue tracker](https://github.com/rosaaghdam/PhyMapNet/issues). 
+If you encounter a bug, experience a failed function, or have a feature request, please open an issue in the GitHub [Issue Tracker](https://github.com/rosaaghdam/PhyMapNet/issues). 
 
 ## License
 
-CMIMN is licensed under the [GNU General Public License v3.0 (GPL-3)](https://www.gnu.org/licenses/gpl-3.0.html). &copy; Solis-Lemus Lab (2024).
+PhyMapNet is licensed under the GNU General Public License v3.0 (GPL-3).  
+See the [LICENSE](LICENSE) file for details.
 
 
 ## Citation
 
 If you use PhyMapNet in your work, we kindly ask that you cite the following paper:
-
 ```bibtex
+@article{shahdoust2026PhyMapNet,
+  title={\texttt{PhyMapNet}: A Phylogeny-Guided Bayesian Framework for Reliable Microbiome Network Inference}},
+  author={Shahdoust, Maryam and Aghdam, Rosa and Taheri, Golnaz},
+  journal={bioRxiv},
+  year={2026},
+  publisher={Cold Spring Harbor Laboratory}
+}
+
 @article{shahdoust2025simmapnet,
   title={SimMapNet: A Bayesian Framework for Gene Regulatory Network Inference Using Gene Ontology Similarities as External Hint},
   author={Shahdoust, Maryam and Aghdam, Rosa and Sadeghi, Mehdi},
