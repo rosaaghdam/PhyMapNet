@@ -4,7 +4,6 @@
 [![GitHub license](https://img.shields.io/github/license/rosaaghdam/PhyMapNet?color=yellow)](https://github.com/rosaaghdam/PhyMapNet/blob/main/LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/rosaaghdam/PhyMapNet)](https://github.com/rosaaghdam/PhyMapNet/issues)
 ![Code Size](https://img.shields.io/github/languages/code-size/rosaaghdam/PhyMapNet?color=white)
-[![GitHub Releases](https://img.shields.io/github/v/release/rosaaghdam/PhyMapNet?display_name=tag)](https://github.com/rosaaghdam/PhyMapNet/releases)
 
 
 ## Description
