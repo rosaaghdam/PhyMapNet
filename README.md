@@ -38,16 +38,67 @@ The package provides two main analysis functions:
 
 </div>
 
-### **phymapnet_fit()**
-Fits a single PhyMapNet model using specified hyperparameters.
-**Inputs**
-- `otu`: Samples × taxa abundance matrix (rows = samples, columns = taxa)
-- `tree`: Phylogenetic tree (`ape::phylo`) with `tip.label` matching OTU column names
 
-**Outputs**
-- `precision_map`: Estimated precision matrix
-- `adjacency`: Binary network (0/1)
-- `threshold`: Sparsification threshold used
+
+- 
+## Toy example (fully reproducible)
+This example generates a small OTU table and a matching tree, then runs both functions.
+
+library(phymapnet)
+library(ape)
+
+set.seed(1)
+
+# ---- Toy OTU table: 10 samples x 6 taxa ----
+otu <- matrix(rpois(10 * 6, lambda = 20), nrow = 10, ncol = 6)
+rownames(otu) <- paste0("Sample", 1:10)
+colnames(otu) <- paste0("Taxa", 1:6)
+
+# ---- Toy phylogenetic tree (tips match OTU taxa names) ----
+tree <- read.tree(text = "((Taxa1:0.1,Taxa2:0.1):0.2,(Taxa3:0.2,(Taxa4:0.1,(Taxa5:0.05,Taxa6:0.05):0.05):0.1):0.1);")
+
+# Visual check
+plot(tree, main = "Toy phylogenetic tree")
+
+# ---- 1) Single-model inference ----
+fit <- phymapnet_fit(
+  otu,
+  tree,
+  alpha = 0.05,
+  k = 3,
+  epsilon1 = 0.1,
+  epsilon2 = 0.1,
+  kernel = "gaussian",
+  th_sparsity = 0.90,
+  normalization = "log"
+)
+
+fit$adjacency
+
+# ---- 2) Reliability ensemble (small grid for quick demo) ----
+res <- phymapnet_reliability(
+  otu,
+  tree,
+  th_fixed = 0.90,
+  alpha_range = c(0.03, 0.05),
+  k_range = 2:3,
+  epsilon1_range = c(0, 0.1),
+  epsilon2_range = c(0, 0.1),
+  kernels = c("gaussian"),
+  normalizations = c("log"),
+  consensus_cut = 0.50,
+  progress = FALSE
+)
+
+# Weighted reliability network
+res$rel_mat
+
+# Binary consensus network
+res$consensus_mat
+
+# Top edges by reliability
+head(res$edge_list, 10)
+
 
 
 
