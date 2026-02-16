@@ -238,28 +238,16 @@ CMIMN is licensed under the [GNU General Public License v3.0 (GPL-3)](https://ww
 
 ## Citation
 
-If you use CMiNet in your work, we kindly ask that you cite the following paper:
+If you use PhyMapNet in your work, we kindly ask that you cite the following paper:
 
 ```bibtex
-@article{aghdam2025cminet,
-  title={CMiNet: An R Package and User-Friendly Shiny App for Constructing Consensus Microbiome Networks},
-  author={Aghdam, Rosa and Sol{\'\i}s-Lemus, Claudia},
+@article{shahdoust2025simmapnet,
+  title={SimMapNet: A Bayesian Framework for Gene Regulatory Network Inference Using Gene Ontology Similarities as External Hint},
+  author={Shahdoust, Maryam and Aghdam, Rosa and Sadeghi, Mehdi},
   journal={bioRxiv},
-  pages={2025--05},
+  pages={2025--04},
   year={2025},
   publisher={Cold Spring Harbor Laboratory}
-}
-
-#SpiecEasi
-@article{kurtz2015sparse,
-  title={Sparse and compositionally robust inference of microbial ecological networks},
-  author={Kurtz, Zachary D and M{\"u}ller, Christian L and Miraldi, Emily R and Littman, Dan R and Blaser, Martin J and Bonneau, Richard A},
-  journal={PLoS computational biology},
-  volume={11},
-  number={5},
-  pages={e1004226},
-  year={2015},
-  publisher={Public Library of Science San Francisco, CA USA}
 }
 
 
