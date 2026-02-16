@@ -30,7 +30,7 @@ install.packages(c("ape", "GMPR", "compositions"))
 ```
 
 
-## Running CMiNet Package
+## Running PhyMapNet Package
 <div align="justify">
 The package provides two main analysis functions:
 
@@ -40,11 +40,11 @@ The package provides two main analysis functions:
 
 </div>
 
-### phymapnet_fit(): single-model inference
-### Inputs
+1. **phymapnet_fit()**: single-model inference
+- Inputs
 otu: samples × taxa abundance matrix (rownames = samples, colnames = taxa)
 tree: phylogenetic tree (ape::phylo) with tip.label matching taxa names
-### Output
+- Output
 precision_map: estimated precision matrix
 adjacency: binary network (0/1)
 threshold: sparsification threshold used
