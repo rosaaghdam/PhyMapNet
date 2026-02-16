@@ -90,6 +90,43 @@ Both functions allow customization of the following parameters:
 - `phymapnet_fit()` constructs a network under a fixed set of hyperparameters.  
 - `phymapnet_reliability()` evaluates network stability across multiple parameter configurations and identifies robust edges through ensemble consensus.
 
+
+## Toy Example (Fully Reproducible)
+
+This example generates a small synthetic OTU table and a matching phylogenetic tree, then runs both `phymapnet_fit()` and `phymapnet_reliability()`.
+
+```{r, message=FALSE, warning=FALSE}
+library(phymapnet)
+library(ape)
+
+set.seed(1)
+
+# -------------------------------------------------
+# 1. Generate a toy OTU table (10 samples × 6 taxa)
+# -------------------------------------------------
+
+otu <- matrix(rpois(10 * 6, lambda = 20), nrow = 10, ncol = 6)
+rownames(otu) <- paste0("Sample", 1:10)
+colnames(otu) <- paste0("Taxa", 1:6)
+
+# -------------------------------------------------
+# 2. Generate a matching phylogenetic tree
+# -------------------------------------------------
+
+tree <- read.tree(text = 
+  "((Taxa1:0.1,Taxa2:0.1):0.2,
+     (Taxa3:0.2,
+        (Taxa4:0.1,
+           (Taxa5:0.05,Taxa6:0.05):0.05
+        ):0.1
+     ):0.1
+   );"
+)
+
+# Visualize the toy tree
+plot(tree, main = "Toy Phylogenetic Tree")
+
+
 ## Toy example (fully reproducible)
 This example generates a small OTU table and a matching tree, then runs both functions.
 
