@@ -41,24 +41,14 @@ The package provides two main analysis functions:
 ### **phymapnet_fit()**
 Fits a single PhyMapNet model using specified hyperparameters.
 **Inputs**
-- `otu`: Samples × taxa abundance matrix  
-  (rows = samples, columns = taxa)
-- `tree`: Phylogenetic tree (`ape::phylo`)  
-  with `tip.label` matching OTU column names
+- `otu`: Samples × taxa abundance matrix (rows = samples, columns = taxa)
+- `tree`: Phylogenetic tree (`ape::phylo`) with `tip.label` matching OTU column names
 
-**Returns**
+**Outputs**
 - `precision_map`: Estimated precision matrix
 - `adjacency`: Binary network (0/1)
 - `threshold`: Sparsification threshold used
 
-
-- Inputs:
-  - otu: samples × taxa abundance matrix (rownames = samples, colnames = taxa)
-  - tree: phylogenetic tree (ape::phylo) with tip.label matching taxa names
-- Output:
-  - precision_map: estimated precision matrix
-  - adjacency: binary network (0/1)
-  - threshold: sparsification threshold used
 
 
 ### Define the parameter on all Algorithms
