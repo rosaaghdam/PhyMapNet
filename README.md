@@ -23,9 +23,9 @@ install.packages("devtools")
 # install phymapnet from GitHub
 devtools::install_github("rosaaghdam/PhyMapNet")
 ```
-**Dependencies**
 If required packages are missing, install them manually:
 ```bash
+# Dependencies
 install.packages(c("ape", "GMPR", "compositions"))
 ```
 
