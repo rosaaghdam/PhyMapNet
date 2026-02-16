@@ -15,28 +15,6 @@
 
 **Figure overview**. PhyMapNet takes normalized microbiome count data and phylogenetic relationships as input, embeds evolutionary structure into a Bayesian graphical model, and infers sparse microbial interaction networks. To ensure robustness, the procedure is repeated across multiple hyperparameter settings, and a stable consensus network is selected based on predefined criteria.
 
-## Table of Contents
-- [Methods Included in CMiNet](#methods-included-in-cminet)
-- [Installation](#installation)
-- [Important Setup Information](Important-Setup-Information)
-- [Running CMiNet Package](#Running-CMiNet-Package)
-  - [CMiNet Function](#CMiNet-Function)
-  - [process_and_visualize_network Function](#process_and_visualize_network-Function)
-  - [plot_hamming_distances Function](#plot_hamming_distances-Function)
-  - [plot_network Function](#plot_network-Function)
-
-## Methods Included in CMiNet
-Algorithms Applied in CMiNet:
-- Pearson coefficient (cor() from stats package)
-- Spearman coefficient (cor() from stats package)
-- Biweight Midcorrelation (bicor() from WGCNA package)
-- SparCC ([R code on GitHub](https://github.com/huayingfang/CCLasso/blob/master/R/SparCC.R))
-- CCLasso ([R code on GitHub](https://github.com/huayingfang/CCLasso/tree/master))
-- SpiecEasi ([SpiecEasi package](https://github.com/zdk123/SpiecEasi))
-- SPRING ([SPRING package](https://github.com/GraceYoon/SPRING))
-- CMIMN ([CMIMN package](https://github.com/solislemuslab/CMIMN))
-- gCoda ([R code on GitHub](https://github.com/huayingfang/gCoda))
-
 ## Installation
 ```bash
 # install devtools if needed
@@ -45,7 +23,7 @@ install.packages("devtools")
 # install phymapnet from GitHub
 devtools::install_github("rosaaghdam/PhyMapNet")
 ```
-# Dependencies
+## Dependencies
 If required packages are missing, install them manually:
 ```bash
 install.packages(c("ape", "GMPR", "compositions"))
