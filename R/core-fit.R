@@ -36,7 +36,10 @@ sparse_quantile <- function(Isigma_star, quantile_level) {
 #' @param otu samples x taxa matrix.
 #' @param tree phylo tree with tips matching taxa.
 #' @param alpha kernel bandwidth (>0).
-#' @param k neighborhood scaling (integer >= 1). Uses K_neighbors = k * p internally.
+#' @param k scaling factor controlling prior strength.
+#' The prior degrees of freedom is set as nue = k * p, where p is the number of taxa.
+#' This implies that the prior contributes information equivalent to k observations per taxon,
+#' ensuring that shrinkage scales appropriately with network size.
 #' @param epsilon1 diagonal jitter for omega_hat.
 #' @param epsilon2 jitter for IB.
 #' @param kernel "gaussian" or "laplacian".
@@ -68,10 +71,10 @@ phymapnet_fit <- function(
   Y <- norm_fun(otuA)
 
   p <- ncol(Y)
-  K_neighbors <- as.integer(k * p)
+  K_factor <- as.integer(k * p)
   C <- kernel_from_dist(dist, alpha, kernel)
 
-  precision <- phymapnet_precision(Y, nue = K_neighbors, epsilon1 = epsilon1, epsilon2 = epsilon2, C = C)
+  precision <- phymapnet_precision(Y, nue = K_factor, epsilon1 = epsilon1, epsilon2 = epsilon2, C = C)
   sp <- sparse_quantile(precision, th_sparsity)
 
   adj <- sp$theta
