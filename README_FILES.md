@@ -47,7 +47,9 @@ PhyMapNet/
 |   `-- generate/                            # Bootstrap and noisy replicate inputs
 |-- result/
 |   |-- reliable_score_all/                  # Precomputed sensitivity networks
-|   `-- reliability_master/                  # Fixed-normalization/kernel masters
+|   |-- reliability_master/                  # Fixed-normalization/kernel masters
+|   `-- hmp_filtered312_nonisolated_selected_important_otus.csv
+|                                            # Important genus-level taxa in the HMP biological network
 |-- check_tree_distance_inputs.R             # Simple input-alignment helper
 |-- example_run_phymapnet_tree_and_distance.R
 |-- test_local_phymapnet_0.1.3.R
@@ -74,6 +76,13 @@ during a local run remain untracked through `.gitignore`.
 | Sensitivity Figure 2 and Tables S3/S4 | `2-sensitivity_analysis/generate_sensitivity_figure2_tables_s3_s4.R` | `result/sensitivity_analysis/` |
 | CMiNet overlap statistics and figures | `4-overlap_cminet/generate_cminet_overlap_figures.R` | Generated locally in `result/cminet_comparison/figures/` |
 | HMP biological figure and tables | `5-biological_evaluation/generate_hmp_biological_evaluation_figure.R` | Generated locally in `result/biological_evaluation_filtered312/` |
+
+### Retained Biological Result Table
+
+`result/hmp_filtered312_nonisolated_selected_important_otus.csv` reports the
+important taxa identified in the HMP biological network at the genus level. It
+includes network-importance measures and taxonomic annotations for the selected
+non-isolated taxa used to interpret the biological network.
 
 ## Expensive Upstream Analyses
 
