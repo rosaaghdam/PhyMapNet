@@ -44,8 +44,18 @@ library(phymapnet)
 Because the R package source is stored in the `phymapnet/` subdirectory:
 
 ```r
-# install.packages("remotes")
-remotes::install_github("https://github.com/rosaaghdam/PhyMapNet", subdir = "phymapnet")
+# Install once if needed:
+install.packages("remotes")
+
+# Install PhyMapNet v0.1.3 from GitHub:
+remotes::install_github(
+  "rosaaghdam/PhyMapNet",
+  subdir = "phymapnet",
+  upgrade = "never"
+)
+
+library(phymapnet)
+packageVersion("phymapnet")
 ```
 
 ## Package Dependencies
