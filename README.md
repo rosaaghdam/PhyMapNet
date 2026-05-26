@@ -1,5 +1,11 @@
 # PhyMapNet
 
+[![GitHub license](https://img.shields.io/github/license/rosaaghdam/PhyMapNet?color=yellow)](https://github.com/rosaaghdam/PhyMapNet/blob/main/LICENSE)
+[![GitHub Issues](https://img.shields.io/github/issues/rosaaghdam/PhyMapNet)](https://github.com/rosaaghdam/PhyMapNet/issues)
+![Code Size](https://img.shields.io/github/languages/code-size/rosaaghdam/PhyMapNet?color=white)
+[![GitHub Releases](https://img.shields.io/github/v/release/rosaaghdam/PhyMapNet?display_name=tag)](https://github.com/rosaaghdam/PhyMapNet/releases)
+
+
 **PhyMapNet** is an R package for phylogeny-guided Bayesian microbial network
 inference. This repository contains the package source and the reproducible
 analysis workflow for the revised PhyMapNet study, including filtering,
@@ -115,12 +121,12 @@ library(phymapnet)
 fit <- phymapnet_fit(
   otu = otu,
   tree = tree,
-  alpha = 0.05,
-  k = 3,
-  epsilon1 = 0.1,
-  epsilon2 = 0.1,
+  alpha = 0.1,
+  k = 10,
+  epsilon1 = 0.5,
+  epsilon2 = 0.,
   kernel = "gaussian",
-  th_sparsity = 0.90,
+  th_sparsity = 0.95,
   normalization = "log",
   prune_tree = TRUE
 )
@@ -139,8 +145,8 @@ is already available.
 res <- phymapnet_reliability(
   otu = otu,
   tree = tree,
-  th_fixed = 0.90,
-  alpha_range = c(0.03, 0.05),
+  th_fixed = 0.95,
+  alpha_range = c(0.01, 0.1),
   k_range = 2:10,
   epsilon1_range = c(0, 1),
   epsilon2_range = c(0, 1),
