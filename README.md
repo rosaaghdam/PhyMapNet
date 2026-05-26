@@ -241,8 +241,15 @@ because it can be rebuilt from source and is excluded by `.gitignore`.
 ## Citation
 
 Please cite the PhyMapNet manuscript when using this package or its study
-workflow. The final bibliographic citation can be inserted here after
-publication.
+workflow. 
+@article{shahdoust2026phymapnet,
+  title={PhyMapNet: A Phylogeny-Guided Bayesian Framework for Reliable Microbiome Network Inference},
+  author={Shahdoust, Maryam and Aghdam, Rosa and Taheri, Golnaz},
+  journal={bioRxiv},
+  pages={2026--02},
+  year={2026},
+  publisher={Cold Spring Harbor Laboratory}
+}
 
 ## Contact
 
