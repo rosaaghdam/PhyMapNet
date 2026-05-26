@@ -186,7 +186,7 @@ The GitHub repository retains the precomputed result sets needed for the
 reported downstream analyses, `result/reliable_score_all/` and
 `result/reliability_master/`, together with the genus-level important-taxa
 table from the HMP biological network:
-`result/hmp_filtered312_nonisolated_selected_important_otus.csv`. Generated
+`result/selected_important_otus.csv`. Generated
 figures and other derived output tables can be regenerated locally from the
 retained results.
 

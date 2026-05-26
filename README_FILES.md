@@ -48,7 +48,7 @@ PhyMapNet/
 |-- result/
 |   |-- reliable_score_all/                  # Precomputed sensitivity networks
 |   |-- reliability_master/                  # Fixed-normalization/kernel masters
-|   `-- hmp_filtered312_nonisolated_selected_important_otus.csv
+|   `-- selected_important_otus.csv
 |                                            # Important genus-level taxa in the HMP biological network
 |-- check_tree_distance_inputs.R             # Simple input-alignment helper
 |-- example_run_phymapnet_tree_and_distance.R
@@ -79,7 +79,7 @@ during a local run remain untracked through `.gitignore`.
 
 ### Retained Biological Result Table
 
-`result/hmp_filtered312_nonisolated_selected_important_otus.csv` reports the
+`result/selected_important_otus.csv` reports the
 important taxa identified in the HMP biological network at the genus level. It
 includes network-importance measures and taxonomic annotations for the selected
 non-isolated taxa used to interpret the biological network.
