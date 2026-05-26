@@ -242,6 +242,7 @@ because it can be rebuilt from source and is excluded by `.gitignore`.
 
 Please cite the PhyMapNet manuscript when using this package or its study
 workflow. 
+
 @article{shahdoust2026phymapnet,
   title={PhyMapNet: A Phylogeny-Guided Bayesian Framework for Reliable Microbiome Network Inference},
   author={Shahdoust, Maryam and Aghdam, Rosa and Taheri, Golnaz},
