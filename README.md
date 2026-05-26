@@ -173,26 +173,7 @@ For distance-matrix input, replace `tree = tree` with `tree = DIS`.
 | `consensus_cut` | Minimum edge-selection reliability required in the binary consensus network. |
 | `prune_tree` | If `TRUE`, retains and aligns taxa shared by the OTU table and phylogenetic tree. |
 
-## Revised Paper Analysis Design
 
-GMPR normalization is not used in the revised package analysis workflow because
-it produced problematic values for some datasets. The revised package interface
-includes `"log"`, `"clr"`, and `"tss"` only.
-
-For final reliability networks used downstream, normalization and kernel are
-fixed first, and reliability is merged over:
-
-```text
-alpha, k, epsilon1, epsilon2
-```
-
-For example, the HMP biological evaluation reads the completed HMP
-`log`/`laplacian` reliability master result.
-
-The sensitivity analysis is different by design: it evaluates how the network
-changes with normalization, kernel, `alpha`, `k`, `epsilon1`, and `epsilon2`.
-It should not be interpreted as one final consensus network merged across all
-normalizations and kernels.
 
 ## Reproduce Paper Outputs
 
@@ -225,7 +206,6 @@ regeneration, see [README_FILES.md](README_FILES.md).
 
 ```bash
 Rscript test_local_phymapnet_0.1.3.R
-Rscript test_local_phymapnet_0.1.3_real_data.R
 Rscript example_run_phymapnet_tree_and_distance.R
 ```
 
