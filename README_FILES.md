@@ -88,17 +88,6 @@ called by the one-command reproduction workflow.
 | `6-running_time/run_phymapnet_hmp_taxa_runtime.R` with full settings | Full runtime benchmarking is computationally expensive. |
 | `6-running_time/run_method_runtime_comparison.R` with full settings | Full seven-method timing comparison is computationally expensive. |
 
-## Revised-Analysis Decisions Preserved
-
-- Package normalization options are `"log"`, `"clr"`, and `"tss"`; GMPR is
-  not used in the revised workflow.
-- Final reliability master networks fix normalization and kernel before merging
-  across `alpha`, `k`, `epsilon1`, and `epsilon2`.
-- The sensitivity workflow separately compares normalization, kernel, `alpha`,
-  `k`, `epsilon1`, and `epsilon2`.
-- CMiNet overlap outputs use `cminet_096`, corresponding to `th=0.96`.
-- The saved HMP biological strong-network rule is
-  `reliability > 0.9999999` and `cminet_096 > 8`.
 
 ## Files To Upload To GitHub
 
