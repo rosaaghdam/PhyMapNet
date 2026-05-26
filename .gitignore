@@ -1,0 +1,16 @@
+.DS_Store
+.Rhistory
+.RData
+.Rproj.user/
+*.Rcheck/
+phymapnet.Rcheck/
+phymapnet_*.tar.gz
+function/
+result/**/*.pdf
+result/**/*.png
+result/bootstrap/
+result/sensitivity_analysis/
+result/cminet_comparison/
+result/biological_evaluation_filtered312/
+result/hmp_taxa_sensitivity/
+result/running_time/

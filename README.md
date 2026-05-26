@@ -1,204 +1,254 @@
-## PhyMapNet: A Phylogeny-Guided Bayesian Framework for Reliable Microbiome Network Inference
-<img src="logo/logo.png" style="width:50%;" align=right>
+# PhyMapNet
 
-[![GitHub license](https://img.shields.io/github/license/rosaaghdam/PhyMapNet?color=yellow)](https://github.com/rosaaghdam/PhyMapNet/blob/main/LICENSE)
-[![GitHub Issues](https://img.shields.io/github/issues/rosaaghdam/PhyMapNet)](https://github.com/rosaaghdam/PhyMapNet/issues)
-![Code Size](https://img.shields.io/github/languages/code-size/rosaaghdam/PhyMapNet?color=white)
+**PhyMapNet** is an R package for phylogeny-guided Bayesian microbial network
+inference. This repository contains the package source and the reproducible
+analysis workflow for the revised PhyMapNet study, including filtering,
+sensitivity analyses, bootstrap/noisy-data stability analyses, CMiNet overlap
+comparisons, HMP biological evaluation, and runtime scripts.
 
+The reviewed package version in this repository is **phymapnet 0.1.3**.
 
-## Description
-<div align="justify">
-  
-**PhyMapNet** is a Bayesian Gaussian Graphical Model framework for inferring microbiome interaction networks that explicitly integrates phylogenetic information. By incorporating evolutionary distances through kernel-based priors, PhyMapNet embeds biological structure directly into precision matrix estimation, enabling robust inference of conditional dependencies among microbial taxa. To reduce sensitivity to hyperparameter choices, PhyMapNet constructs reliability-based consensus networks by aggregating results across a large hyperparameter ensemble, yielding stable and interpretable microbiome networks with controllable sparsity. The method is computationally efficient and supports multiple normalization strategies, making it suitable for real-world, high-dimensional microbiome datasets.
-</div>
+## Main Features
 
-**Figure overview**. PhyMapNet takes normalized microbiome count data and phylogenetic relationships as input, embeds evolutionary structure into a Bayesian graphical model, and infers sparse microbial interaction networks. To ensure robustness, the procedure is repeated across multiple hyperparameter settings, and a stable consensus network is selected based on predefined criteria.
+- Inference of microbial association networks using a phylogenetic tree or a
+  named phylogenetic distance matrix.
+- Single-model network estimation with `phymapnet_fit()`.
+- Ensemble edge reliability estimation with `phymapnet_reliability()`.
+- Supported normalizations: `"log"`, `"clr"`, and `"tss"`.
+- Supported phylogenetic kernels: `"gaussian"` and `"laplacian"`.
+- Taxon alignment and optional tree pruning before kernel construction.
 
 ## Installation
-```r
-# install devtools if needed
-install.packages("devtools")
 
-# install phymapnet from GitHub
-devtools::install_github("rosaaghdam/PhyMapNet")
-```
-If required packages are missing, install them manually:
+### Install the reviewed local source package
+
+From the repository root:
+
 ```r
-# Dependencies
-install.packages(c("ape", "GUniFrac", "compositions"))
+install.packages("phymapnet_0.1.3.tar.gz", repos = NULL, type = "source")
+library(phymapnet)
+packageVersion("phymapnet")
 ```
 
-## Running `phymapnet`
+### Install from CRAN
 
-The package provides two main analysis functions for phylogeny-aware microbial network inference.
+After version 0.1.3 is accepted on CRAN:
 
----
+```r
+install.packages("phymapnet")
+library(phymapnet)
+```
 
-### 1. `phymapnet_fit()` — Single-Model Inference
+### Install from GitHub
 
-Fits a single PhyMapNet model using specified hyperparameters to estimate a sparse microbial association network.
+Because the R package source is stored in the `phymapnet/` subdirectory:
 
-#### Inputs
+```r
+# install.packages("remotes")
+remotes::install_github("YOUR_GITHUB_USERNAME/PhyMapNet", subdir = "phymapnet")
+```
 
-- `otu`: Samples × taxa abundance matrix  
-  (rows = samples, columns = taxa)
-- `tree`: Phylogenetic tree (`ape::phylo`)  
-  with `tip.label` matching OTU column names
+Replace `YOUR_GITHUB_USERNAME` with the final repository owner after upload.
 
-#### Outputs
+## Package Dependencies
 
-- `precision_map`: Estimated precision matrix  
-- `adjacency`: Binary network (0/1)  
-- `threshold`: Sparsification threshold used  
+The R package imports:
 
----
+```r
+stats
+ape
+compositions
+```
 
-### 2. `phymapnet_reliability()` — Ensemble Reliability Inference
+Paper-analysis scripts additionally require selected packages including
+`dplyr`, `tibble`, `tidyr`, `ggplot2`, `patchwork`, `igraph`, `influential`,
+`SpiecEasi`, and `CMiNet`.
 
-Performs hyperparameter-ensemble inference to assess edge stability across multiple model configurations.
+## Input Data
 
-#### Inputs
+### OTU/ASV table
 
-- `otu`: Samples × taxa abundance matrix  
-  (rows = samples, columns = taxa)
-- `tree`: Phylogenetic tree (`ape::phylo`)  
-  with `tip.label` matching OTU column names
+`otu` is a numeric matrix or data frame:
 
-#### Outputs
+- rows: samples;
+- columns: taxa or ASVs;
+- column names: taxon identifiers.
 
-- `rel_mat`: Weighted reliability network (values in [0, 1])  
-- `consensus_mat`: Binary consensus network based on `consensus_cut`  
-- `edge_list`: Edges ranked by reliability  
+### Phylogenetic tree input
 
----
+The second input may be an `ape::phylo` tree:
 
-### Model Parameters
+```r
+fit <- phymapnet_fit(otu = otu, tree = tree)
+```
 
-Both functions allow customization of the following parameters:
+When `prune_tree = TRUE`, nonshared OTU/tree taxa are removed and the OTU
+columns and tree tip labels are aligned before phylogenetic distances are
+computed.
 
-- `alpha`: Bandwidth parameter controlling the decay of the phylogenetic kernel  
-- `k`: Neighborhood scaling factor defining the effective prior sample size (`k × p`)  
-- `epsilon1`: Diagonal regularization parameter added to the prior covariance matrix  
-- `epsilon2`: Regularization parameter added during precision matrix inversion  
-- `kernel`: Kernel type (`"gaussian"` or `"laplacian"`) defining how phylogenetic distances are transformed into similarity weights  
-- `normalization`: Data transformation method (`"log"`, `"gmpr"`, `"clr"`, `"tss"`) applied before network inference  
----
+### Phylogenetic distance-matrix input
 
-### Conceptual Difference
+The second input may alternatively be a named, symmetric distance matrix:
 
-- `phymapnet_fit()` constructs a network under a fixed set of hyperparameters.  
-- `phymapnet_reliability()` evaluates network stability across multiple parameter configurations and identifies robust edges through ensemble consensus.
+```r
+fit <- phymapnet_fit(otu = otu, tree = DIS)
+```
 
+`DIS` must have matching row and column taxon names, nonnegative values, a
+zero diagonal, and taxa compatible with the OTU columns. The public argument
+name remains `tree`, but the function recognizes either a tree or distance
+matrix.
 
-## Toy Example (Fully Reproducible)
-
-This example generates a small synthetic OTU table and a matching phylogenetic tree, then runs both `phymapnet_fit()` and `phymapnet_reliability()`.
+## Single-Model Inference
 
 ```r
 library(phymapnet)
-library(ape)
 
-set.seed(123)
-
-# -------------------------------------------------
-# 1. Generate a toy OTU table (10 samples × 6 taxa)
-# -------------------------------------------------
-
-otu <- matrix(rpois(10 * 6, lambda = 20), nrow = 10, ncol = 6)
-rownames(otu) <- paste0("Sample", 1:10)
-colnames(otu) <- paste0("Taxa", 1:6)
-
-# -------------------------------------------------
-# 2. Generate a matching phylogenetic tree
-# -------------------------------------------------
-
-tree <- read.tree(text = 
-  "((Taxa1:0.1,Taxa2:0.1):0.2,
-     (Taxa3:0.2,
-        (Taxa4:0.1,
-           (Taxa5:0.05,Taxa6:0.05):0.05
-        ):0.1
-     ):0.1
-   );"
-)
-plot(tree, main = "Toy Phylogenetic Tree")
-```
-
-## Single-Model Inference
-```r
 fit <- phymapnet_fit(
-  otu,
-  tree,
+  otu = otu,
+  tree = tree,
   alpha = 0.05,
   k = 3,
   epsilon1 = 0.1,
   epsilon2 = 0.1,
   kernel = "gaussian",
   th_sparsity = 0.90,
-  normalization = "log"
+  normalization = "log",
+  prune_tree = TRUE
 )
 
-# Binary adjacency matrix
 fit$adjacency
+fit$precision
+fit$edge_list
 ```
 
-## Ensemble Reliability Inference
+The same call may use `tree = DIS` when a named phylogenetic distance matrix
+is already available.
+
+## Reliability Ensemble Inference
+
 ```r
 res <- phymapnet_reliability(
-  otu,
-  tree,
+  otu = otu,
+  tree = tree,
   th_fixed = 0.90,
   alpha_range = c(0.03, 0.05),
-  k_range = 2:3,
-  epsilon1_range = c(0, 0.1),
-  epsilon2_range = c(0, 0.1),
+  k_range = 2:10,
+  epsilon1_range = c(0, 1),
+  epsilon2_range = c(0, 1),
   kernels = c("gaussian"),
   normalizations = c("log"),
   consensus_cut = 0.50,
+  prune_tree = TRUE,
   progress = FALSE
 )
 
-# Weighted reliability matrix
 res$rel_mat
-
-# Binary consensus network
 res$consensus_mat
-
-# Top edges ranked by reliability
-head(res$edge_list, 10)
+res$edge_list
 ```
 
+For distance-matrix input, replace `tree = tree` with `tree = DIS`.
 
-## Reporting Issues and Asking Questions
+## Main Parameters
 
-If you encounter a bug, experience a failed function, or have a feature request, please open an issue in the GitHub [Issue Tracker](https://github.com/rosaaghdam/PhyMapNet/issues). 
+| Parameter | Meaning |
+|---|---|
+| `alpha` / `alpha_range` | Kernel bandwidth controlling decay with phylogenetic distance. |
+| `k` / `k_range` | Prior degree-of-freedom multiplier; internally used as `k * p`, where `p` is the number of taxa. |
+| `epsilon1` / `epsilon1_range` | Regularization term applied during prior covariance construction. |
+| `epsilon2` / `epsilon2_range` | Additional numerical regularization in precision estimation. |
+| `kernel` / `kernels` | `"gaussian"` or `"laplacian"` phylogenetic kernel. |
+| `normalization` / `normalizations` | `"log"`, `"clr"`, or `"tss"` transformation. |
+| `th_sparsity` | Quantile threshold for sparsifying a single-model precision estimate. |
+| `th_fixed` | Fixed quantile threshold applied to each model in an ensemble. |
+| `consensus_cut` | Minimum edge-selection reliability required in the binary consensus network. |
+| `prune_tree` | If `TRUE`, retains and aligns taxa shared by the OTU table and phylogenetic tree. |
 
-## License
+## Revised Paper Analysis Design
 
-PhyMapNet is licensed under the GNU General Public License v3.0 (GPL-3).  
-See the [LICENSE](LICENSE) file for details.
+GMPR normalization is not used in the revised package analysis workflow because
+it produced problematic values for some datasets. The revised package interface
+includes `"log"`, `"clr"`, and `"tss"` only.
 
+For final reliability networks used downstream, normalization and kernel are
+fixed first, and reliability is merged over:
+
+```text
+alpha, k, epsilon1, epsilon2
+```
+
+For example, the HMP biological evaluation reads the completed HMP
+`log`/`laplacian` reliability master result.
+
+The sensitivity analysis is different by design: it evaluates how the network
+changes with normalization, kernel, `alpha`, `k`, `epsilon1`, and `epsilon2`.
+It should not be interpreted as one final consensus network merged across all
+normalizations and kernels.
+
+## Reproduce Paper Outputs
+
+The GitHub repository retains the two precomputed result sets needed for the
+reported downstream analyses: `result/reliable_score_all/` and
+`result/reliability_master/`. Generated figures and derived tables are not
+tracked because they can be regenerated locally from these retained results.
+
+From a terminal, install the plotting dependencies and run the reproducibility
+script:
+
+```bash
+Rscript -e 'install.packages(c("ape", "dplyr", "tibble", "tidyr", "ggplot2", "patchwork", "igraph", "influential"))'
+bash scripts/reproduce_paper_outputs.sh
+```
+
+This command regenerates filtered OTU/distance inputs, sensitivity Figure 2
+and Tables S3/S4, CMiNet overlap outputs, and the HMP biological outputs from
+the included precomputed result files.
+
+The script intentionally does **not** rerun multi-day network generation, the
+complete bootstrap analysis, or full runtime benchmarks. The bootstrap script
+is supplied for reproducibility, but its completed summary results are not
+included in the GitHub upload.
+
+For a complete file-by-file guide and commands for expensive optional
+regeneration, see [README_FILES.md](README_FILES.md).
+
+## Quick Package Tests
+
+```bash
+Rscript test_local_phymapnet_0.1.3.R
+Rscript test_local_phymapnet_0.1.3_real_data.R
+Rscript example_run_phymapnet_tree_and_distance.R
+```
+
+The real-data test uses the three filtered study datasets and checks agreement
+between tree-based and distance-matrix-based package calls with small test
+grids.
+
+## CRAN Source Package
+
+The CRAN submission archive prepared for version 0.1.3 is:
+
+```text
+phymapnet_0.1.3.tar.gz
+```
+
+The editable package source is in `phymapnet/`. For GitHub, the source
+directory should be uploaded. The `.tar.gz` archive may also be attached to a
+GitHub Release for convenience; it is not required in the tracked repository
+because it can be rebuilt from source and is excluded by `.gitignore`.
 
 ## Citation
 
-If you use PhyMapNet in your work, we kindly ask that you cite the following paper:
-```bibtex
-@article{shahdoust2026PhyMapNet,
-  title={\texttt{PhyMapNet}: A Phylogeny-Guided Bayesian Framework for Reliable Microbiome Network Inference}},
-  author={Shahdoust, Maryam and Aghdam, Rosa and Taheri, Golnaz},
-  journal={bioRxiv},
-  year={2026},
-  publisher={Cold Spring Harbor Laboratory}
-}
+Please cite the PhyMapNet manuscript when using this package or its study
+workflow. The final bibliographic citation can be inserted here after
+publication.
 
-@article{shahdoust2025simmapnet,
-  title={SimMapNet: A Bayesian Framework for Gene Regulatory Network Inference Using Gene Ontology Similarities as External Hint},
-  author={Shahdoust, Maryam and Aghdam, Rosa and Sadeghi, Mehdi},
-  journal={bioRxiv},
-  pages={2025--04},
-  year={2025},
-  publisher={Cold Spring Harbor Laboratory}
-}
+## Contact
 
+Rosa Aghdam
+rosaaghdam@gmail.com
 
-```
+## License
+
+The R package is distributed under the GPL-3 license.
