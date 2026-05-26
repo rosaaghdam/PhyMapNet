@@ -45,10 +45,8 @@ Because the R package source is stored in the `phymapnet/` subdirectory:
 
 ```r
 # install.packages("remotes")
-remotes::install_github("YOUR_GITHUB_USERNAME/PhyMapNet", subdir = "phymapnet")
+remotes::install_github("https://github.com/rosaaghdam/PhyMapNet", subdir = "phymapnet")
 ```
-
-Replace `YOUR_GITHUB_USERNAME` with the final repository owner after upload.
 
 ## Package Dependencies
 
