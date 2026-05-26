@@ -1,10 +1,9 @@
 # PhyMapNet
 
-[![GitHub license](https://img.shields.io/github/license/rosaaghdam/PhyMapNet?color=yellow)](https://github.com/rosaaghdam/PhyMapNet/blob/main/LICENSE)
+[![Version: 0.1.3](https://img.shields.io/badge/version-0.1.3-blue.svg)](phymapnet/DESCRIPTION)
+[![License: GPL-3](https://img.shields.io/badge/license-GPL--3-yellow.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
 [![GitHub Issues](https://img.shields.io/github/issues/rosaaghdam/PhyMapNet)](https://github.com/rosaaghdam/PhyMapNet/issues)
-![Code Size](https://img.shields.io/github/languages/code-size/rosaaghdam/PhyMapNet?color=white)
-[![GitHub Releases](https://img.shields.io/github/v/release/rosaaghdam/PhyMapNet?display_name=tag)](https://github.com/rosaaghdam/PhyMapNet/releases)
-
+![Code Size](https://img.shields.io/github/languages/code-size/rosaaghdam/PhyMapNet?color=lightgrey)
 
 **PhyMapNet** is an R package for phylogeny-guided Bayesian microbial network
 inference. This repository contains the package source and the reproducible
