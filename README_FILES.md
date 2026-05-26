@@ -89,64 +89,6 @@ called by the one-command reproduction workflow.
 | `6-running_time/run_method_runtime_comparison.R` with full settings | Full seven-method timing comparison is computationally expensive. |
 
 
-## Files To Upload To GitHub
-
-Upload these source and documentation files:
-
-```text
-.gitignore
-PhyMapNet_Git.Rproj
-README.md
-README_FILES.md
-phymapnet/
-1-filtering/
-2-sensitivity_analysis/
-3-bootstrap/
-4-overlap_cminet/
-5-biological_evaluation/
-6-running_time/
-scripts/
-check_tree_distance_inputs.R
-example_run_phymapnet_tree_and_distance.R
-test_local_phymapnet_0.1.3.R
-test_local_phymapnet_0.1.3_real_data.R
-```
-
-Upload these data and compact result folders:
-
-```text
-data/original_data/
-data/filter/
-data/generate/
-result/reliable_score_all/
-result/reliability_master/
-```
-
-The retained precomputed result folders allow the sensitivity, overlap, and
-biological downstream figures and tables to be regenerated without multi-day
-fitting. Bootstrap outputs require running the provided bootstrap workflow.
-Do not track generated PDF/PNG figures or derived output folders in `result/`;
-the scripts recreate them locally.
-
-Do not upload local or obsolete artifacts:
-
-```text
-.DS_Store
-.Rhistory
-.RData
-.Rproj.user/
-*.Rcheck/
-phymapnet_0.1.2.tar.gz
-phymapnet_0.1.3.tar.gz
-function/                  # legacy helper code not used by the cleaned workflow
-result/**/*.pdf
-result/**/*.png
-result/bootstrap/
-result/sensitivity_analysis/
-result/cminet_comparison/
-result/biological_evaluation_filtered312/
-```
-
 ## Package Archive Recommendation
 
 Upload the editable `phymapnet/` source folder to GitHub. The CRAN submission
