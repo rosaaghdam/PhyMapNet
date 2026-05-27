@@ -208,18 +208,6 @@ The real-data test uses the three filtered study datasets and checks agreement
 between tree-based and distance-matrix-based package calls with small test
 grids.
 
-## CRAN Source Package
-
-The CRAN submission archive prepared for version 0.1.3 is:
-
-```text
-phymapnet_0.1.3.tar.gz
-```
-
-The editable package source is in `phymapnet/`. For GitHub, the source
-directory should be uploaded. The `.tar.gz` archive may also be attached to a
-GitHub Release for convenience; it is not required in the tracked repository
-because it can be rebuilt from source and is excluded by `.gitignore`.
 
 ## Citation
 
