@@ -239,11 +239,4 @@ workflow.
 }
 ```
 
-## Contact
 
-Rosa Aghdam
-rosaaghdam@gmail.com
-
-## License
-
-The R package is distributed under the GPL-3 license.
