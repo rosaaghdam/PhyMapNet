@@ -24,13 +24,12 @@ comparisons, HMP biological evaluation, and runtime scripts.
 ## Installation
 
 ### Install from CRAN
-
-
 ```r
 install.packages("phymapnet")
 library(phymapnet)
+packageVersion("phymapnet")
 ```
-
+The current CRAN release is version 0.1.3.
 ### Install from GitHub
 
 Because the R package source is stored in the `phymapnet/` subdirectory:
