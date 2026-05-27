@@ -11,8 +11,6 @@ analysis workflow for the revised PhyMapNet study, including filtering,
 sensitivity analyses, bootstrap/noisy-data stability analyses, CMiNet overlap
 comparisons, HMP biological evaluation, and runtime scripts.
 
-The reviewed package version in this repository is **phymapnet 0.1.3**.
-
 ## Main Features
 
 - Inference of microbial association networks using a phylogenetic tree or a
