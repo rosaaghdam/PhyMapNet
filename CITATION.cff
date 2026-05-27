@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use PhyMapNet, please cite this software and the associated manuscript."
+title: "phymapnet: Phylogeny-Guided Bayesian Microbial Network Inference"
+type: software
+version: "0.1.3"
+date-released: "2026-05-26"
+authors:
+  - family-names: "Aghdam"
+    given-names: "Rosa"
+    email: "rosaaghdam@gmail.com"
+license: GPL-3.0-only
+repository-code: "https://github.com/rosaaghdam/PhyMapNet"
+url: "https://CRAN.R-project.org/package=phymapnet"
+keywords:
+  - "microbiome network"
+  - "phylogenetic kernel"
+  - "Bayesian graphical model"
+  - "R package"

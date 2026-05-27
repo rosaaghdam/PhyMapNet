@@ -1,7 +1,7 @@
 # PhyMapNet
 
 [![Version: 0.1.3](https://img.shields.io/badge/version-0.1.3-blue.svg)](phymapnet/DESCRIPTION)
-[![License: GPL-3](https://img.shields.io/badge/license-GPL--3-yellow.svg)](https://www.gnu.org/licenses/gpl-3.0.html)
+[![GitHub license](https://img.shields.io/github/license/rosaaghdam/PhyMapNet?color=yellow)](LICENSE)
 [![GitHub Issues](https://img.shields.io/github/issues/rosaaghdam/PhyMapNet)](https://github.com/rosaaghdam/PhyMapNet/issues)
 ![Code Size](https://img.shields.io/github/languages/code-size/rosaaghdam/PhyMapNet?color=lightgrey)
 
@@ -224,5 +224,4 @@ workflow.
   publisher={Cold Spring Harbor Laboratory}
 }
 ```
-
 
