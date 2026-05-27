@@ -25,19 +25,8 @@ The reviewed package version in this repository is **phymapnet 0.1.3**.
 
 ## Installation
 
-### Install the reviewed local source package
-
-From the repository root:
-
-```r
-install.packages("phymapnet_0.1.3.tar.gz", repos = NULL, type = "source")
-library(phymapnet)
-packageVersion("phymapnet")
-```
-
 ### Install from CRAN
 
-After version 0.1.3 is accepted on CRAN:
 
 ```r
 install.packages("phymapnet")
