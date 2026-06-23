@@ -5,11 +5,15 @@
 [![GitHub Issues](https://img.shields.io/github/issues/rosaaghdam/PhyMapNet)](https://github.com/rosaaghdam/PhyMapNet/issues)
 ![Code Size](https://img.shields.io/github/languages/code-size/rosaaghdam/PhyMapNet?color=lightgrey)
 
-**PhyMapNet** is an R package for phylogeny-guided Bayesian microbial network
-inference. This repository contains the package source and the reproducible
-analysis workflow for the revised PhyMapNet study, including filtering,
-sensitivity analyses, bootstrap/noisy-data stability analyses, CMiNet overlap
-comparisons, HMP biological evaluation, and runtime scripts.
+**PhyMapNet** is an R package for phylogeny-guided Bayesian microbial network inference. This repository contains the package source and the reproducible analysis workflow for the revised PhyMapNet study, including filtering, sensitivity analyses, bootstrap/noisy-data stability analyses, CMiNet overlap comparisons, HMP biological evaluation, and runtime scripts.
+
+<p align="center">
+  <img src="man/figures/GA_7.png" alt="PhyMapNet workflow" width="100%">
+</p>
+
+**Figure.** Overview of the PhyMapNet workflow. Microbiome abundance data and a phylogenetic tree are used to construct kernel-informed priors for Bayesian Gaussian graphical model inference. Networks inferred across hyperparameter configurations are aggregated into a reliability matrix to construct a consensus microbiome network.
+
+
 
 ## Main Features
 
