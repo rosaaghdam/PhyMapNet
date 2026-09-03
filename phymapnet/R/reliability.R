@@ -10,7 +10,7 @@
 #' @param k_range integer vector.
 #' @param epsilon1_range numeric vector.
 #' @param epsilon2_range numeric vector.
-#' @param kernels character vector: "gaussian" and/or "laplacian".
+#' @param kernels character vector: "Squared Exponential (SE)" and/or "Ornstein–Uhlenbeck (OU)".
 #' @param normalizations character vector: subset of `c("log","clr","tss")`.
 #' @param consensus_cut reliability cutoff for binary consensus (default 0.5).
 #' @param prune_tree prune tree tips not in OTU when `tree` is a phylogenetic
@@ -33,8 +33,8 @@ phymapnet_reliability <- function(
   progress = TRUE,
   progress_every = 500
 ) {
-  kernels <- intersect(kernels, c("gaussian","laplacian"))
-  if (length(kernels) == 0) stop("kernels must include 'gaussian' and/or 'laplacian'.", call. = FALSE)
+  kernels <- intersect(kernels, c("SE","OU"))
+  if (length(kernels) == 0) stop("kernels must include 'SE' and/or 'OU'.", call. = FALSE)
   allowed_normalizations <- c("log", "clr", "tss")
   invalid_normalizations <- setdiff(normalizations, allowed_normalizations)
   if (length(invalid_normalizations)) {
@@ -64,8 +64,8 @@ phymapnet_reliability <- function(
 
     for (alpha in alpha_range) {
       KER <- list()
-      if ("gaussian" %in% kernels)  KER$gaussian  <- exp(-(dist^2) / (2 * alpha^2))
-      if ("laplacian" %in% kernels) KER$laplacian <- exp(-dist / alpha)
+      if ("SE" %in% kernels)  KER$SE  <- exp(-(dist^2) / (2 * alpha^2))
+      if ("OU" %in% kernels) KER$OU <- exp(-dist / alpha)
 
       for (k in k_range) {
         K_neighbors <- as.integer(k * p)
