@@ -40,7 +40,7 @@ sparse_quantile <- function(Isigma_star, quantile_level) {
 #' @param k neighborhood scaling (integer >= 1). Uses K_neighbors = k * p internally.
 #' @param epsilon1 diagonal jitter for omega_hat.
 #' @param epsilon2 jitter for IB.
-#' @param kernel "gaussian" or "laplacian".
+#' @param kernel "Squared Exponential (SE)" or "Ornstein–Uhlenbeck (OU)".
 #' @param th_sparsity quantile level for sparsification (e.g., 0.95).
 #' @param normalization `"log"`, `"clr"`, or `"tss"`.
 #' @param prune_tree prune tree tips not in OTU when `tree` is a phylogenetic
@@ -53,7 +53,7 @@ phymapnet_fit <- function(
   k = 5,
   epsilon1 = 0,
   epsilon2 = 0,
-  kernel = c("gaussian","laplacian"),
+  kernel = c("SE","OU"),
   th_sparsity = 0.95,
   normalization = c("log","clr","tss"),
   prune_tree = TRUE
